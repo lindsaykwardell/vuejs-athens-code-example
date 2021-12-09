@@ -1,19 +1,16 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  emits: ["clearCompletedTodos"],
-  props: {
-    remainingCount: {
-      type: Number,
-      required: true,
-    },
-    totalCount: {
-      type: Number,
-      required: true,
-    },
+<script setup lang="ts">
+defineProps({
+  remainingCount: {
+    type: Number,
+    required: true,
+  },
+  totalCount: {
+    type: Number,
+    required: true,
   },
 });
+
+defineEmits(["clearCompletedTodos"]);
 </script>
 
 <template>
