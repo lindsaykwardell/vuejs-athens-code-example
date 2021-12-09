@@ -1,20 +1,25 @@
 <script setup lang="ts">
+// import { Todo } from "@/types/Todo";
 import { ref } from "vue";
 
-const props = defineProps({
-  id: {
-    type: Number,
-    required: true,
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-  completed: {
-    type: Boolean,
-    default: false,
-  },
-});
+/*
+As of now, the type declaration argument must be one of the following to 
+ensure correct static analysis:
+
+- A type literal
+- A reference to an interface or a type literal in the same file
+
+Currently complex types and type imports from other files are not supported. 
+It is theoretically possible to support type imports in the future
+*/
+
+// const props = defineProps<Todo>(); <- DOES NOT WORK
+
+const props = defineProps<{
+  id: number;
+  title: string;
+  completed: boolean;
+}>();
 const emit = defineEmits(["updateTodo", "deleteTodo"]);
 
 const editedTitle = ref("");
