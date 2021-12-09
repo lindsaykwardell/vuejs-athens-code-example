@@ -15,11 +15,16 @@ It is theoretically possible to support type imports in the future
 
 // const props = defineProps<Todo>(); <- DOES NOT WORK
 
-const props = defineProps<{
-  id: number;
-  title: string;
-  completed: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    id: number;
+    title: string;
+    completed?: boolean;
+  }>(),
+  {
+    completed: false,
+  }
+);
 const emit = defineEmits(["updateTodo", "deleteTodo"]);
 
 const editedTitle = ref("");
