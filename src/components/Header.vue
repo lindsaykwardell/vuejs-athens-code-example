@@ -1,25 +1,16 @@
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 
-export default defineComponent({
-  name: "Header",
-  emits: ["addTodo"],
-  setup(props, { emit }) {
-    const newTodo = ref("");
+const emit = defineEmits(["addTodo"]);
 
-    function addTodo() {
-      if (newTodo.value) {
-        emit("addTodo", newTodo.value);
-        newTodo.value = "";
-      }
-    }
+const newTodo = ref("");
 
-    return {
-      newTodo,
-      addTodo,
-    };
-  },
-});
+function addTodo() {
+  if (newTodo.value) {
+    emit("addTodo", newTodo.value);
+    newTodo.value = "";
+  }
+}
 </script>
 
 <template>
