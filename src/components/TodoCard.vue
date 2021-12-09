@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // import { Todo } from "@/types/Todo";
 import { ref } from "vue";
+import syncTodo from "@/services/api";
 
 /*
 As of now, the type declaration argument must be one of the following to 
@@ -26,6 +27,8 @@ const props = withDefaults(
   }
 );
 const emit = defineEmits(["updateTodo", "deleteTodo"]);
+
+await syncTodo(props);
 
 const editedTitle = ref("");
 

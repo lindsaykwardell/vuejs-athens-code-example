@@ -68,13 +68,18 @@ function clearCompleted() {
       />
       <label for="toggle-all"></label>
       <ul class="todo-list">
-        <TodoCard
-          v-for="todo in visibleTodos"
-          :key="todo.id"
-          v-bind="todo"
-          @updateTodo="updateTodo"
-          @deleteTodo="deleteTodo"
-        />
+        <Suspense v-for="todo in visibleTodos" :key="todo.id">
+          <template #fallback>
+            <li class="todo">
+              <label>Syncing Todo...</label>
+            </li>
+          </template>
+          <TodoCard
+            v-bind="todo"
+            @updateTodo="updateTodo"
+            @deleteTodo="deleteTodo"
+          />
+        </Suspense>
       </ul>
     </section>
     <Footer
