@@ -1,57 +1,47 @@
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 
-export default defineComponent({
-  props: {
-    id: {
-      type: Number,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    completed: {
-      type: Boolean,
-      default: false,
-    },
+const props = defineProps({
+  id: {
+    type: Number,
+    required: true,
   },
-  emit: ["updateTodo", "deleteTodo"],
-  setup(props, { emit }) {
-    const editedTitle = ref("");
-
-    function editTodo() {
-      editedTitle.value = props.title;
-    }
-
-    function doneEditing() {
-      if (editedTitle.value.trim()) {
-        emit("updateTodo", {
-          id: props.id,
-          title: editedTitle.value,
-          completed: props.completed,
-        });
-
-        editedTitle.value = "";
-      }
-    }
-
-    function toggleCompleted() {
-      emit("updateTodo", {
-        id: props.id,
-        title: props.title,
-        completed: !props.completed,
-      });
-    }
-
-    return {
-      editedTitle,
-      editTodo,
-      doneEditing,
-      toggleCompleted,
-    };
+  title: {
+    type: String,
+    required: true,
+  },
+  completed: {
+    type: Boolean,
+    default: false,
   },
 });
+const emit = defineEmits(["updateTodo", "deleteTodo"]);
+
+const editedTitle = ref("");
+
+function editTodo() {
+  editedTitle.value = props.title;
+}
+
+function doneEditing() {
+  if (editedTitle.value.trim()) {
+    emit("updateTodo", {
+      id: props.id,
+      title: editedTitle.value,
+      completed: props.completed,
+    });
+
+    editedTitle.value = "";
+  }
+}
+
+function toggleCompleted() {
+  emit("updateTodo", {
+    id: props.id,
+    title: props.title,
+    completed: !props.completed,
+  });
+}
 </script>
 
 <template>
