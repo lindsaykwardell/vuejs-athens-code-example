@@ -58,7 +58,8 @@ function clearCompleted() {
 
 <template>
   <section class="todoapp">
-    <Header @addTodo="addTodo" />
+    <!-- This shouldn't work! -->
+    <Header class="footer" @addTodo="addTodo" />
     <section class="main">
       <input
         id="toggle-all"
